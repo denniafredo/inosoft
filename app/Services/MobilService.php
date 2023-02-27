@@ -19,14 +19,10 @@ class MobilService{
     public function findAll()
      {
        $mobils = Mobil::with('kendaraan')->get();
-       $mobilCollection = new Collection;
        if(count($mobils)==0){
-        return new Collection;
+        return null;
        }
-       foreach($mobils as $mobil){
-          $mobilCollection[] = Self::recompileData($mobil);
-       }
-       return $mobilCollection;
+       return $mobils;
      }
 
      public function findById($id)

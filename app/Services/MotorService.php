@@ -19,14 +19,10 @@ class MotorService{
     public function findAll()
      {
        $motors = Motor::with('kendaraan')->get();
-       $motorCollection = new Collection;
        if(count($motors)==0){
-        return new Collection;
+        return null;
        }
-       foreach($motors as $motor){
-          $motorCollection[] = Self::recompileData($motor);
-       }
-       return $motorCollection;
+       return $motors;
      }
 
      public function findById($id)

@@ -2,45 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mobil;
-use App\Services\MobilService;
+use App\Models\Kendaraan;
+use App\Services\KendaraanService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
-class MobilController extends Controller
+class KendaraanController extends Controller
 {
-    public function index(MobilService $mobilService) 
+    public function stock(KendaraanService $kendaraanService) 
     {
-        $mobils = $mobilService->findAll();
-        if($mobils){
-            $mobilCollection = [];
-            foreach($mobils as $mobil){
-                $mobilCollection[] = $mobilService->recompileData($mobil);
-            }
-            return response()->json(
-                [
-                    'data' => $mobilCollection
-                ], Response::HTTP_OK);  
-        }
+        $stocks = $kendaraanService->getStock();
         return response()->json(
             [
-                'message' => 'Mobil Not Found',
-                'data' => '',
-            ], Response::HTTP_NOT_FOUND);    
+                'data' => $stocks
+            ], Response::HTTP_OK);   
     }
 
-    public function store(Request $request, MobilService $mobilService)
+    public function store(Request $request, KendaraanService $kendaraanService)
     {
         if($this->validation($request)->status() != Response::HTTP_OK){
             return $this->validation($request);
         }
         try{
-            $mobil = $mobilService->create($request);
+            $kendaraan = $kendaraanService->create($request);
             return response()->json(
                 [
-                    'data' => $mobil
+                    'data' => $kendaraan
                 ], Response::HTTP_CREATED);
         }
         catch(\Exception $e){
@@ -51,41 +40,41 @@ class MobilController extends Controller
         }       
     }
 
-    public function show($id,MobilService $mobilService)
+    public function show($id,KendaraanService $kendaraanService)
     {
-        if($mobil = $mobilService->findById($id)){
-            $mobil = $mobilService->recompileData($mobil);
+        if($kendaraan = $kendaraanService->findById($id)){
+            $kendaraan = $kendaraanService->recompileData($kendaraan);
             return response()->json(
                 [
-                    'data' => $mobil
+                    'data' => $kendaraan
                 ], Response::HTTP_OK);  
         }
         else{
             return response()->json(
                 [
-                    'message' => 'Mobil Not Found',
+                    'message' => 'Kendaraan Not Found',
                     'data' => '',
                 ], Response::HTTP_NOT_FOUND);  
         }
     }
 
-    public function update($id,Request $request, MobilService $mobilService)
+    public function update($id,Request $request, KendaraanService $kendaraanService)
     {
         if($this->validation($request)->status() != Response::HTTP_OK){
             return $this->validation($request);
         }
         try{
-            $mobil = $mobilService->updateById($id,$request);
-            if(!$mobil){
+            $kendaraan = $kendaraanService->updateById($id,$request);
+            if(!$kendaraan){
                 return response()->json(
                     [
-                        'message' => "Mobil Not Found",
+                        'message' => "Kendaraan Not Found",
                         'data' => []
                     ], Response::HTTP_NOT_FOUND); 
             }
             return response()->json(
                 [
-                    'data' => $mobil
+                    'data' => $kendaraan
                 ], Response::HTTP_OK); 
         }
         catch(\Exception $e){
@@ -96,19 +85,19 @@ class MobilController extends Controller
         }    
     }
 
-    public function destroy($id,MobilService $mobilService)
+    public function destroy($id,KendaraanService $kendaraanService)
     {
-        $mobil = $mobilService->deleteById($id);
-        if(!$mobil){
+        $kendaraan = $kendaraanService->deleteById($id);
+        if(!$kendaraan){
             return response()->json(
                 [
-                    'message' => "Mobil Not Found",
+                    'message' => "Kendaraan Not Found",
                     'data' => []
                 ], Response::HTTP_NOT_FOUND); 
         }
         return response()->json(
             [
-                'data' => $mobil
+                'data' => $kendaraan
             ], Response::HTTP_OK);  
     }
 
@@ -116,7 +105,7 @@ class MobilController extends Controller
 
     public function validation($request)
     {
-        $rules = new MobilService;
+        $rules = new KendaraanService;
         $validator = Validator::make($request->all(), $rules->getRules());
         if($validator->fails()){
             return response()->json(

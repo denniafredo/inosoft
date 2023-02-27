@@ -13,12 +13,22 @@ class MotorController extends Controller
 {
     public function index(MotorService $motorService) 
     {
-        $motor = $motorService->findAll();
-        
+        $motors = $motorService->findAll();
+        if($motors){
+            $motorCollection = [];
+            foreach($motors as $motor){
+                $motorCollection[] = $motorService->recompileData($motor);
+            }
+            return response()->json(
+                [
+                    'data' => $motorCollection
+                ], Response::HTTP_OK);   
+        }
         return response()->json(
             [
-                'data' => $motor
-            ], Response::HTTP_OK);    
+                'message' => 'Motor Not Found',
+                'data' => ''
+            ], Response::HTTP_NOT_FOUND);  
     }
 
     public function store(Request $request, MotorService $motorService)

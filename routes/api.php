@@ -2,8 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MotorController;
+use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\MobilController;
+use App\Http\Controllers\MotorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,11 @@ use App\Http\Controllers\MobilController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::controller(KendaraanController::class)->group(function () {
+    Route::get('kendaraans/stock', 'stock');
+    Route::get('kendaraans/report', 'report');
+}); 
 
 Route::controller(MotorController::class)->group(function () {
     Route::get('motors', 'index');

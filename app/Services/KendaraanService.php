@@ -15,5 +15,11 @@ class KendaraanService{
       {
         return $this->rules;
       }
+
+      public function getStock()
+      {
+        $kendaraans = Kendaraan::with('jenis')->get();
+        return $kendaraans;
+      }
      
 }
