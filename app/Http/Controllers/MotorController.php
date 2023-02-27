@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Validator;
 
 class MotorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(MotorService $motorService) : JsonResponse 
     {
         $motor = $motorService->findAll();
@@ -26,22 +21,6 @@ class MotorController extends Controller
             ], Response::HTTP_OK);    
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-       
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request, MotorService $motorService) : JsonResponse
     {
         try{
@@ -59,12 +38,6 @@ class MotorController extends Controller
         }       
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Motor  $motor
-     * @return \Illuminate\Http\Response
-     */
     public function show($id,MotorService $motorService) : JsonResponse
     {
         $motor = $motorService->findById($id);
@@ -75,24 +48,6 @@ class MotorController extends Controller
             ], Response::HTTP_OK);  
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Motor  $motor
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Motor $motor)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Motor  $motor
-     * @return \Illuminate\Http\Response
-     */
     public function update($id,Request $request, MotorService $motorService):JsonResponse
     {
         $motor = $motorService->updateById($id,$this->validation($request));
@@ -109,12 +64,6 @@ class MotorController extends Controller
             ], Response::HTTP_OK);   
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Motor  $motor
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id,MotorService $motorService) : JsonResponse
     {
         $motor = $motorService->deleteById($id);
@@ -142,6 +91,7 @@ class MotorController extends Controller
             'tipe_transmisi' => 'required|string',
         ];
     }
+
     public function validation($request)
     {
         $validator = Validator::make($request->all(), $this->rules());

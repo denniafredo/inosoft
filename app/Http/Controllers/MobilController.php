@@ -3,83 +3,103 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mobil;
+use App\Services\MobilService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 class MobilController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(MobilService $mobilService) : JsonResponse 
     {
-        //
+        $mobil = $mobilService->findAll();
+        
+        return response()->json(
+            [
+                'data' => $mobil
+            ], Response::HTTP_OK);    
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(Request $request, MobilService $mobilService) : JsonResponse
     {
-        //
+        try{
+            $mobil = $mobilService->create($this->validation($request));
+            return response()->json(
+                [
+                    'data' => $mobil
+                ], Response::HTTP_CREATED);
+        }
+        catch(\Exception $e){
+            return response()->json(
+                [
+                    'message' => 'Error : '. $e->getMessage()
+                ], Response::HTTP_CONFLICT);
+        }       
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function show($id,MobilService $mobilService) : JsonResponse
     {
-        //
+        $mobil = $mobilService->findById($id);
+        
+        return response()->json(
+            [
+                'data' => $mobil
+            ], Response::HTTP_OK);  
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Mobil  $mobil
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Mobil $mobil)
+    public function update($id,Request $request, MobilService $mobilService):JsonResponse
     {
-        //
+        $mobil = $mobilService->updateById($id,$this->validation($request));
+        if($mobil->errorCode){
+            return response()->json(
+                [
+                    'message' => "Mobil Not Found",
+                    'data' => []
+                ], Response::HTTP_NOT_FOUND); 
+        }
+        return response()->json(
+            [
+                'data' => $mobil
+            ], Response::HTTP_OK);   
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Mobil  $mobil
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Mobil $mobil)
+    public function destroy($id,MobilService $mobilService) : JsonResponse
     {
-        //
+        $mobil = $mobilService->deleteById($id);
+        if($mobil->errorCode){
+            return response()->json(
+                [
+                    'message' => "Mobil Not Found",
+                    'data' => []
+                ], Response::HTTP_NOT_FOUND); 
+        }
+        return response()->json(
+            [
+                'data' => $mobil
+            ], Response::HTTP_OK);  
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Mobil  $mobil
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Mobil $mobil)
+    public function rules()
     {
-        //
+        return [
+            'tahun_keluaran' => 'required|numeric',
+            'warna' => 'required|string',
+            'harga' => 'required|numeric',
+            'mesin' => 'required|string',
+            'tipe_suspensi' => 'required|string',
+            'tipe_transmisi' => 'required|string',
+        ];
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Mobil  $mobil
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Mobil $mobil)
+    public function validation($request)
     {
-        //
+        $validator = Validator::make($request->all(), $this->rules());
+        if($validator->fails()){
+            return response()->json(
+                $validator->errors(),
+            Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+        return $request->all();
     }
 }
