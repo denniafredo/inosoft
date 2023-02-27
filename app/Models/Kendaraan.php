@@ -15,4 +15,8 @@ class Kendaraan extends Model
     {
         return $this->morphTo();
     }
+    public function transaksi()
+    {
+        return $this->morphOne(Transaksi::class, 'id_kendaraan');
+    }
 }

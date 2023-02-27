@@ -2,7 +2,6 @@
 namespace App\Services;
 use App\Models\Kendaraan;
 use App\Models\Mobil;
-use Illuminate\Database\Eloquent\Collection;
 
 class MobilService{
   private $rules = [

@@ -2,7 +2,6 @@
 namespace App\Services;
 use App\Models\Kendaraan;
 use App\Models\Motor;
-use Illuminate\Database\Eloquent\Collection;
 
 class MotorService{
   private $rules = [
