@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class MobilController extends Controller
 {
-    public function index(MobilService $mobilService) : JsonResponse 
+    public function index(MobilService $mobilService) 
     {
         $mobil = $mobilService->findAll();
         
@@ -21,10 +21,13 @@ class MobilController extends Controller
             ], Response::HTTP_OK);    
     }
 
-    public function store(Request $request, MobilService $mobilService) : JsonResponse
+    public function store(Request $request, MobilService $mobilService)
     {
+        if($this->validation($request)->status() != Response::HTTP_OK){
+            return $this->validation($request);
+        }
         try{
-            $mobil = $mobilService->create($this->validation($request));
+            $mobil = $mobilService->create($request);
             return response()->json(
                 [
                     'data' => $mobil
@@ -38,36 +41,55 @@ class MobilController extends Controller
         }       
     }
 
-    public function show($id,MobilService $mobilService) : JsonResponse
+    public function show($id,MobilService $mobilService)
     {
-        $mobil = $mobilService->findById($id);
-        
-        return response()->json(
-            [
-                'data' => $mobil
-            ], Response::HTTP_OK);  
-    }
-
-    public function update($id,Request $request, MobilService $mobilService):JsonResponse
-    {
-        $mobil = $mobilService->updateById($id,$this->validation($request));
-        if($mobil->errorCode){
+        if($mobil = $mobilService->findById($id)){
+            $mobil = $mobilService->recompileData($mobil);
             return response()->json(
                 [
-                    'message' => "Mobil Not Found",
-                    'data' => []
-                ], Response::HTTP_NOT_FOUND); 
+                    'data' => $mobil
+                ], Response::HTTP_OK);  
         }
-        return response()->json(
-            [
-                'data' => $mobil
-            ], Response::HTTP_OK);   
+        else{
+            return response()->json(
+                [
+                    'message' => 'Mobil Not Found',
+                    'data' => '',
+                ], Response::HTTP_NOT_FOUND);  
+        }
     }
 
-    public function destroy($id,MobilService $mobilService) : JsonResponse
+    public function update($id,Request $request, MobilService $mobilService)
+    {
+        if($this->validation($request)->status() != Response::HTTP_OK){
+            return $this->validation($request);
+        }
+        try{
+            $mobil = $mobilService->updateById($id,$request);
+            if(!$mobil){
+                return response()->json(
+                    [
+                        'message' => "Mobil Not Found",
+                        'data' => []
+                    ], Response::HTTP_NOT_FOUND); 
+            }
+            return response()->json(
+                [
+                    'data' => $mobil
+                ], Response::HTTP_OK); 
+        }
+        catch(\Exception $e){
+            return response()->json(
+                [
+                    'message' => 'Error : '. $e->getMessage()
+                ], Response::HTTP_CONFLICT);
+        }    
+    }
+
+    public function destroy($id,MobilService $mobilService)
     {
         $mobil = $mobilService->deleteById($id);
-        if($mobil->errorCode){
+        if(!$mobil){
             return response()->json(
                 [
                     'message' => "Mobil Not Found",
@@ -80,26 +102,21 @@ class MobilController extends Controller
             ], Response::HTTP_OK);  
     }
 
-    public function rules()
-    {
-        return [
-            'tahun_keluaran' => 'required|numeric',
-            'warna' => 'required|string',
-            'harga' => 'required|numeric',
-            'mesin' => 'required|string',
-            'tipe_suspensi' => 'required|string',
-            'tipe_transmisi' => 'required|string',
-        ];
-    }
+    
 
     public function validation($request)
     {
-        $validator = Validator::make($request->all(), $this->rules());
+        $rules = new MobilService;
+        $validator = Validator::make($request->all(), $rules->getRules());
         if($validator->fails()){
             return response()->json(
-                $validator->errors(),
+                [
+                    'error'=> $validator->errors(),
+                ],    
             Response::HTTP_UNPROCESSABLE_ENTITY);
         }
-        return $request->all();
+        return response()->json(
+            $request->all(),    
+        Response::HTTP_OK);
     }
 }

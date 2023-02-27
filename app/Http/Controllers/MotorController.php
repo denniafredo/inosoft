@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class MotorController extends Controller
 {
-    public function index(MotorService $motorService) : JsonResponse 
+    public function index(MotorService $motorService) 
     {
         $motor = $motorService->findAll();
         
@@ -21,10 +21,13 @@ class MotorController extends Controller
             ], Response::HTTP_OK);    
     }
 
-    public function store(Request $request, MotorService $motorService) : JsonResponse
+    public function store(Request $request, MotorService $motorService)
     {
+        if($this->validation($request)->status() != Response::HTTP_OK){
+            return $this->validation($request);
+        }
         try{
-            $motor = $motorService->create($this->validation($request));
+            $motor = $motorService->create($request);
             return response()->json(
                 [
                     'data' => $motor
@@ -38,36 +41,55 @@ class MotorController extends Controller
         }       
     }
 
-    public function show($id,MotorService $motorService) : JsonResponse
+    public function show($id,MotorService $motorService)
     {
-        $motor = $motorService->findById($id);
-        
-        return response()->json(
-            [
-                'data' => $motor
-            ], Response::HTTP_OK);  
-    }
-
-    public function update($id,Request $request, MotorService $motorService):JsonResponse
-    {
-        $motor = $motorService->updateById($id,$this->validation($request));
-        if($motor->errorCode){
+        if($motor = $motorService->findById($id)){
+            $motor = $motorService->recompileData($motor);
             return response()->json(
                 [
-                    'message' => "Motor Not Found",
-                    'data' => []
-                ], Response::HTTP_NOT_FOUND); 
+                    'data' => $motor
+                ], Response::HTTP_OK);  
         }
-        return response()->json(
-            [
-                'data' => $motor
-            ], Response::HTTP_OK);   
+        else{
+            return response()->json(
+                [
+                    'message' => 'Motor Not Found',
+                    'data' => '',
+                ], Response::HTTP_NOT_FOUND);  
+        }
     }
 
-    public function destroy($id,MotorService $motorService) : JsonResponse
+    public function update($id,Request $request, MotorService $motorService)
+    {
+        if($this->validation($request)->status() != Response::HTTP_OK){
+            return $this->validation($request);
+        }
+        try{
+            $motor = $motorService->updateById($id,$request);
+            if(!$motor){
+                return response()->json(
+                    [
+                        'message' => "Motor Not Found",
+                        'data' => []
+                    ], Response::HTTP_NOT_FOUND); 
+            }
+            return response()->json(
+                [
+                    'data' => $motor
+                ], Response::HTTP_OK); 
+        }
+        catch(\Exception $e){
+            return response()->json(
+                [
+                    'message' => 'Error : '. $e->getMessage()
+                ], Response::HTTP_CONFLICT);
+        }    
+    }
+
+    public function destroy($id,MotorService $motorService)
     {
         $motor = $motorService->deleteById($id);
-        if($motor->errorCode){
+        if(!$motor){
             return response()->json(
                 [
                     'message' => "Motor Not Found",
@@ -80,26 +102,21 @@ class MotorController extends Controller
             ], Response::HTTP_OK);  
     }
 
-    public function rules()
-    {
-        return [
-            'tahun_keluaran' => 'required|numeric',
-            'warna' => 'required|string',
-            'harga' => 'required|numeric',
-            'mesin' => 'required|string',
-            'tipe_suspensi' => 'required|string',
-            'tipe_transmisi' => 'required|string',
-        ];
-    }
+    
 
     public function validation($request)
     {
-        $validator = Validator::make($request->all(), $this->rules());
+        $rules = new MotorService;
+        $validator = Validator::make($request->all(), $rules->getRules());
         if($validator->fails()){
             return response()->json(
-                $validator->errors(),
+                [
+                    'error'=> $validator->errors(),
+                ],    
             Response::HTTP_UNPROCESSABLE_ENTITY);
         }
-        return $request->all();
+        return response()->json(
+            $request->all(),    
+        Response::HTTP_OK);
     }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MotorController;
+use App\Http\Controllers\MobilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,12 @@ Route::controller(MotorController::class)->group(function () {
     Route::put('motors/{id}', 'update');
     Route::delete('motors/{id}', 'destroy');
 }); 
+
+Route::controller(MobilController::class)->group(function () {
+    Route::get('mobils', 'index');
+    Route::post('mobils', 'store');
+    Route::get('mobils/{id}', 'show');
+    Route::put('mobils/{id}', 'update');
+    Route::delete('mobils/{id}', 'destroy');
+}); 
+

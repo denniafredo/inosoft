@@ -5,7 +5,18 @@ use App\Models\Motor;
 use Illuminate\Database\Eloquent\Collection;
 
 class MotorService{
-    public function findAll() : Collection
+  private $rules = [
+    'mesin' => 'required|string',
+    'tipe_suspensi' => 'required|string',
+    'tipe_transmisi' => 'required|string',
+  ];
+  public function getRules()
+      {
+        $kendaraanRules = new KendaraanService;
+        return array_merge((array) $this->rules, (array) $kendaraanRules->getRules());
+
+      }
+    public function findAll()
      {
        $motors = Motor::with('kendaraan')->get();
        $motorCollection = new Collection;
@@ -18,16 +29,12 @@ class MotorService{
        return $motorCollection;
      }
 
-     public function findById($id) : Motor
+     public function findById($id)
      {
        $motor = Motor::with('kendaraan')->where('_id',$id)->first();
-       if(!$motor){
-        return new Motor;
-       }
-       $motorCollection = Self::recompileData($motor);
-       return $motorCollection;
+       return $motor;
      }
-    public function create($data) : Kendaraan
+    public function create($data)
      {
        $motor = Motor::create([
            'mesin' => $data['mesin'],
@@ -44,42 +51,38 @@ class MotorService{
        $kendaraanById = Kendaraan::with('jenis')->where("_id",$dataCreated->_id)->first();
        return $kendaraanById;
      }
-     public function deleteById($id) : Motor
+     public function deleteById($id)
      {
-       $motor = Motor::with('kendaraan')->where('_id',$id)->first();
-       if(!$motor){
-         $motor = new Motor;
-         $motor->errorCode = '404';
-         return $motor;
-       }
-       
-       $motor->kendaraan()->delete();
-       $motor->delete();
-       return $motor;
-     }
-     public function updateById($id,$data) : Kendaraan
-     {
-      $motor = Motor::with('kendaraan')->where('_id',$id)->first();
-       if(!$motor){
-         $kendaraan = new Kendaraan;
-         $kendaraan->errorCode = '404';
-         return $kendaraan;
-       }
-       $motor->update([
-           'mesin' => $data['mesin'],
-           'tipe_suspensi' => $data['tipe_suspensi'],
-           'tipe_transmisi' => $data['tipe_transmisi']
-       ]);
+        if($motor = $this->findById($id)){
+          $motor->kendaraan()->delete();
+          $motor->delete();
+          return $motor;
+        }
+        return null;
+    }
 
-       $dataUpdated= $motor->kendaraan()->update([
-          'tahun_keluaran' => $data['tahun_keluaran'],
-          'warna' => $data['warna'],
-          'harga' => $data['harga']
-       ]);
-       $kendaraanById = Kendaraan::with('jenis')->where("jenis_id",$id)->first();
-       return $kendaraanById;
+     public function updateById($id,$data)
+     {
+        $motor = $this->findById($id);
+        if(!$motor){
+          return null;
+        }
+        $motor->update([
+            'mesin' => $data['mesin'],
+            'tipe_suspensi' => $data['tipe_suspensi'],
+            'tipe_transmisi' => $data['tipe_transmisi']
+        ]);
+
+        $motor->kendaraan()->update([
+            'tahun_keluaran' => $data['tahun_keluaran'],
+            'warna' => $data['warna'],
+            'harga' => $data['harga']
+        ]);
+        $kendaraanById = Kendaraan::with('jenis')->where("jenis_id",$id)->first();
+        return $kendaraanById;
+      
      }
-     public function recompileData(Motor $motor):Motor
+     public function recompileData(Motor $motor)
      {
        $motorCollection = new Motor;
        $motorCollection->id = $motor->_id;
