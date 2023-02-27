@@ -19,7 +19,16 @@ class KendaraanService{
       public function getStock()
       {
         $kendaraans = Kendaraan::with('jenis')->get();
-        return $kendaraans;
+        $stocks = new \stdClass;
+
+        foreach ($kendaraans as $kendaraan) {
+            $jenis = strtolower(explode('\\',get_class($kendaraan->jenis))[2]);
+            if(!property_exists($stocks,$jenis)){
+              $stocks->{$jenis} = 0;
+          }
+            $stocks->{$jenis}++;
+        }
+        return $stocks;
       }
      
 }
