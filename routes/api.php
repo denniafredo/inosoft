@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::controller(KendaraanController::class)->group(function () {
     Route::get('kendaraans/stock', 'stock');
+    Route::get('kendaraans/sell', 'sell');
     Route::get('kendaraans/report', 'report');
 }); 
 
