@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\MobilController;
 use App\Http\Controllers\MotorController;
+use App\Http\Controllers\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +44,7 @@ Route::controller(MobilController::class)->group(function () {
     Route::delete('mobils/{id}', 'destroy');
 }); 
 
+Route::controller(TransaksiController::class)->group(function () {
+    Route::post('transaksi', 'store');
+    Route::get('transaksi/report', 'report');
+}); 

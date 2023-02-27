@@ -16,6 +16,12 @@ class TransaksiController extends Controller
         }
         try{
             $transaksi = $transaksiService->create($request);
+            if(!$transaksi){
+                return response()->json(
+                [
+                    'message' => 'Error : Kendaraan Sudah Terjual!'
+                ], Response::HTTP_CONFLICT);
+            }
             return response()->json(
                 [
                     'data' => $transaksi
@@ -28,7 +34,14 @@ class TransaksiController extends Controller
                 ], Response::HTTP_CONFLICT);
         }       
     }
-
+    public function report(TransaksiService $transaksiService)
+    {
+        $report = $transaksiService->getReport();
+        return response()->json(
+            [
+                'data' => $report
+            ], Response::HTTP_OK);
+    }
     public function validation($request)
     {
         $rules = new TransaksiService;

@@ -17,6 +17,6 @@ class Kendaraan extends Model
     }
     public function transaksi()
     {
-        return $this->morphOne(Transaksi::class, 'id_kendaraan');
+        return $this->hasOne(Transaksi::class);
     }
 }

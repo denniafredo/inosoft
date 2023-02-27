@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 use App\Models\Kendaraan;
+use App\Models\Transaksi;
 
 class KendaraanService{
 
@@ -16,7 +17,8 @@ class KendaraanService{
 
       public function getStock()
       {
-        $kendaraans = Kendaraan::with('jenis')->get();
+        $transaksi = Transaksi::pluck('id_kendaraan')->all();
+        $kendaraans = Kendaraan::with('jenis','transaksi')->whereNotIn('_id',$transaksi)->get();
         $stocks = new \stdClass;
 
         foreach ($kendaraans as $kendaraan) {

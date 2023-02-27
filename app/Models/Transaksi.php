@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Jenssegers\Mongodb\Eloquent\Model;
 
-class Kendaraan extends Model
+class Transaksi extends Model
 {
     use HasFactory;
     protected $collection = 'transaksi';
@@ -13,6 +13,6 @@ class Kendaraan extends Model
 
     public function kendaraan()
     {
-        return $this->morphTo();
+        return $this->belongsTo(Kendaraan::class,'id_kendaraan','_id');
     }
 }
