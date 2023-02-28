@@ -57,7 +57,7 @@ class AuthController extends Controller
 
         //Send failed response if request is not valid
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->messages()], Response::HTTP_OK);
+            return response()->json(['errors' => $validator->messages()], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         //Request is validated
@@ -80,7 +80,7 @@ class AuthController extends Controller
         return response()->json([
             'success' => true,
             'token' => $this->createNewToken($token),
-        ]);
+        ],Response::HTTP_OK);
     }
  
     public function logout(Request $request)
