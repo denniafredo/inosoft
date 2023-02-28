@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kendaraan;
+use App\Models\Transaksi;
 use App\Services\TransaksiService;
+use App\Services\KendaraanService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
@@ -19,15 +22,18 @@ class TransaksiController extends Controller
             return $this->validation($request);
         }
         try{
-            $transaksi = $transaksiService->create($request);
-            if(!$transaksi){
-                return response()->json(
-                [
-                    'message' => 'Error : Kendaraan Sudah Terjual!'
+            if($transaksiService->findById($request->id_kendaraan)){
+                return response()->json([
+                  "message" => "Kendaraan Sudah Terjual"
+                ], Response::HTTP_CONFLICT);
+              }
+              if(!Kendaraan::find($request->id_kendaraan)){
+                return response()->json([
+                  "message" => "Kendaraan Tidak Valid"
                 ], Response::HTTP_CONFLICT);
             }
-            return response()->json(
-                [
+            $transaksi = $transaksiService->create($request);
+            return response()->json([
                     'data' => $transaksi
                 ], Response::HTTP_CREATED);
         }

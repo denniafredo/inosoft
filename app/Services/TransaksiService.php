@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 use App\Models\Transaksi;
+use App\Models\Kendaraan;
 
 class TransaksiService{
 
@@ -27,9 +28,6 @@ class TransaksiService{
      }
       public function create($data)
      {
-        if($this->findById($data['id_kendaraan'])){
-          return false;
-        }
         $transaksi = Transaksi::create([
            'id_kendaraan' => $data['id_kendaraan'],
            'harga_jual' => $data['harga_jual']
