@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Validator;
 
 class MobilController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
     public function index(MobilService $mobilService) 
     {
         $mobils = $mobilService->findAll();

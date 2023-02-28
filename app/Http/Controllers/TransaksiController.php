@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Validator;
 
 class TransaksiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
     public function store(Request $request, TransaksiService $transaksiService)
     {
         if($this->validation($request)->status() != Response::HTTP_OK){

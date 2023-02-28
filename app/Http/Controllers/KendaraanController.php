@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Validator;
 
 class KendaraanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
     public function stock(KendaraanService $kendaraanService) 
     {
         $stocks = $kendaraanService->getStock();

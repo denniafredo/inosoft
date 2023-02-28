@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Validator;
 
 class MotorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
     public function index(MotorService $motorService) 
     {
         $motors = $motorService->findAll();
