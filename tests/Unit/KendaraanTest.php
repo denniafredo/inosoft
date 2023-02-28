@@ -28,7 +28,7 @@ class KendaraanTest extends TestCase
         }
         return $user;
     }
-    public function testGetStokKendaraan()
+    public function testGetStockKendaraan()
     {
         $token = $this->authenticate();
         $this->withHeaders([
