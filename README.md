@@ -29,3 +29,5 @@
 - php artisan jwt:secret
 - php artisan serve
 
+## Postman
+- Use inosoft.postman_collection.json
