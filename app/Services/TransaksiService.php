@@ -37,12 +37,14 @@ class TransaksiService{
 
      public function getReport()
      {
-       $transaksi = $this->findAll();
-       $report = [];
-       foreach ($transaksi as $trx) {
-        $report[] = $this->compileDataToReport($trx);
-       }
-       return $report;
+        $transaksi = $this->findAll();
+        $report = [];
+        if($transaksi){
+          foreach ($transaksi as $trx) {
+            $report[] = $this->compileDataToReport($trx);
+          }
+        }
+        return $report;
      }
 
      public function compileDataToReport(Transaksi $transaksi)

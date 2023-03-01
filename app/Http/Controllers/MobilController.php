@@ -101,12 +101,12 @@ class MobilController extends Controller
     public function destroy($id,MobilService $mobilService)
     {
         $mobil = $mobilService->deleteById($id);
-        if(!$mobil){
+        if($mobil->message){
             return response()->json(
                 [
-                    'message' => "Mobil Not Found",
+                    'message' => $mobil->message,
                     'data' => []
-                ], Response::HTTP_NOT_FOUND); 
+                ], $mobil->code); 
         }
         return response()->json(
             [

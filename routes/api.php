@@ -32,9 +32,8 @@ Route::group([
         Route::post('auth/refresh', 'refresh');
     });
     Route::controller(KendaraanController::class)->group(function () {
+        Route::get('kendaraans', 'index');
         Route::get('kendaraans/stock', 'stock');
-        Route::get('kendaraans/sell', 'sell');
-        Route::get('kendaraans/report', 'report');
     }); 
     Route::controller(MotorController::class)->group(function () {
         Route::get('motors', 'index');

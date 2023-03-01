@@ -101,12 +101,12 @@ class MotorController extends Controller
     public function destroy($id,MotorService $motorService)
     {
         $motor = $motorService->deleteById($id);
-        if(!$motor){
+        if($motor->message){
             return response()->json(
                 [
-                    'message' => "Motor Not Found",
+                    'message' => $motor->message,
                     'data' => []
-                ], Response::HTTP_NOT_FOUND); 
+                ], $motor->code); 
         }
         return response()->json(
             [

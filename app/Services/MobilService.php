@@ -2,6 +2,7 @@
 namespace App\Services;
 use App\Models\Kendaraan;
 use App\Models\Mobil;
+use App\Models\Transaksi;
 
 class MobilService{
   private $rules = [
@@ -48,12 +49,24 @@ class MobilService{
      }
      public function deleteById($id)
      {
-        if($mobil = $this->findById($id)){
+      $response = new \stdClass;
+
+      if($mobil = $this->findById($id)){
+        $trx = Transaksi::where($mobil->kendaraan->_id)->first();
+        if(!$trx){
           $mobil->kendaraan()->delete();
           $mobil->delete();
           return $mobil;
         }
-        return null;
+        else {
+          $response->message = 'Mobil Already Sold';
+          $response->code = 409;
+          return $response;
+        }
+      }
+      $response->message = 'Mobil Not Found';
+      $response->code = 404;
+      return $response;
     }
 
      public function updateById($id,$data)

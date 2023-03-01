@@ -14,13 +14,19 @@ class KendaraanService{
       {
         return $this->rules;
       }
-
+      public function findAll()
+      {
+        $kendaraan = Kendaraan::with('jenis')->get();
+        if(count($kendaraan)==0){
+         return null;
+        }
+        return $kendaraan;
+      }
       public function getStock()
       {
         $transaksi = Transaksi::pluck('id_kendaraan')->all();
         $kendaraans = Kendaraan::with('jenis','transaksi')->whereNotIn('_id',$transaksi)->get();
         $stocks = new \stdClass;
-
         foreach ($kendaraans as $kendaraan) {
             $jenis = strtolower(explode('\\',get_class($kendaraan->jenis))[2]);
             if(!property_exists($stocks,$jenis)){

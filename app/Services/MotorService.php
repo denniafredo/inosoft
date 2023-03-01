@@ -2,6 +2,7 @@
 namespace App\Services;
 use App\Models\Kendaraan;
 use App\Models\Motor;
+use App\Models\Transaksi;
 
 class MotorService{
   private $rules = [
@@ -48,12 +49,24 @@ class MotorService{
      }
      public function deleteById($id)
      {
+        $response = new \stdClass;
+
         if($motor = $this->findById($id)){
-          $motor->kendaraan()->delete();
-          $motor->delete();
-          return $motor;
+          $trx = Transaksi::where($motor->kendaraan->_id)->first();
+          if(!$trx){
+            $motor->kendaraan()->delete();
+            $motor->delete();
+            return $motor;
+          }
+          else {
+            $response->message = 'Motor Already Sold';
+            $response->code = 409;
+            return $response;
+          }
         }
-        return null;
+        $response->message = 'Motor Not Found';
+        $response->code = 404;
+        return $response;
     }
 
      public function updateById($id,$data)

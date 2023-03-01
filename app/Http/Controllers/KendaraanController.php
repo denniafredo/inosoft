@@ -12,6 +12,15 @@ class KendaraanController extends Controller
     {
         $this->middleware('auth:api');
     }
+
+    public function index(KendaraanService $kendaraanService) 
+    {
+        $kendaraans = $kendaraanService->findAll();
+        return response()->json(
+            [
+                'data' => $kendaraans
+            ], Response::HTTP_OK);   
+    }
     public function stock(KendaraanService $kendaraanService) 
     {
         $stocks = $kendaraanService->getStock();
