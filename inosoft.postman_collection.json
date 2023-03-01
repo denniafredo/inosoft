@@ -1,0 +1,801 @@
+{
+	"info": {
+		"_postman_id": "adca41b6-071b-48fc-a8e6-0ee59a762b09",
+		"name": "inosoft",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23444689"
+	},
+	"item": [
+		{
+			"name": "Motor",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc2MzQ0MzYsImV4cCI6MTY3NzYzODAzNiwibmJmIjoxNjc3NjM0NDM2LCJqdGkiOiJjcEJEQmJQdUphNzBtVzd1Iiwic3ViIjoiNjNmZGU1YTBhOWIxNmU0NTUwMDkyZGMzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.bAv6OTAZUBXynZ33dpHQBKtqlI5jGYyiutThJQaRDX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tahun_keluaran\" : 2000,\r\n    \"warna\" : \"hitam\",\r\n    \"harga\" : 2000000,\r\n    \"mesin\" : \"baru\",\r\n    \"tipe_suspensi\" : \"A\",\r\n    \"tipe_transmisi\" : \"B\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/motors/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"motors",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc2MzQ0MzYsImV4cCI6MTY3NzYzODAzNiwibmJmIjoxNjc3NjM0NDM2LCJqdGkiOiJjcEJEQmJQdUphNzBtVzd1Iiwic3ViIjoiNjNmZGU1YTBhOWIxNmU0NTUwMDkyZGMzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.bAv6OTAZUBXynZ33dpHQBKtqlI5jGYyiutThJQaRDX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tahun_keluaran\" : 2000,\r\n    \"warna\" : \"hitam MANIS\",\r\n    \"harga\" : 2000000,\r\n    \"mesin\" : \"baru\",\r\n    \"tipe_suspensi\" : \"A\",\r\n    \"tipe_transmisi\" : \"B\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/motors/63feac74c0749fadab0acf64",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"motors",
+								"63feac74c0749fadab0acf64"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc2MzQ0MzYsImV4cCI6MTY3NzYzODAzNiwibmJmIjoxNjc3NjM0NDM2LCJqdGkiOiJjcEJEQmJQdUphNzBtVzd1Iiwic3ViIjoiNjNmZGU1YTBhOWIxNmU0NTUwMDkyZGMzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.bAv6OTAZUBXynZ33dpHQBKtqlI5jGYyiutThJQaRDX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/api/motors/63feac74c0749fadab0acf64",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"motors",
+								"63feac74c0749fadab0acf64"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc2MzQ0MzYsImV4cCI6MTY3NzYzODAzNiwibmJmIjoxNjc3NjM0NDM2LCJqdGkiOiJjcEJEQmJQdUphNzBtVzd1Iiwic3ViIjoiNjNmZGU1YTBhOWIxNmU0NTUwMDkyZGMzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.bAv6OTAZUBXynZ33dpHQBKtqlI5jGYyiutThJQaRDX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc1Nzg0MzgsImV4cCI6MTY3NzU4MjAzOCwibmJmIjoxNjc3NTc4NDM4LCJqdGkiOiJOQ0tkYms0RVFscUR2YkFsIiwic3ViIjoiNjNmZGNjZDJhOWIxNmU0NTUwMDkyZGMyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.HFV7mzoqU0bvEivIqgwP9uzsTfEChEFyuBCNYMwbz0w",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/motors/63feac74c0749fadab0acf64",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"motors",
+								"63feac74c0749fadab0acf64"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc2MzQ0MzYsImV4cCI6MTY3NzYzODAzNiwibmJmIjoxNjc3NjM0NDM2LCJqdGkiOiJjcEJEQmJQdUphNzBtVzd1Iiwic3ViIjoiNjNmZGU1YTBhOWIxNmU0NTUwMDkyZGMzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.bAv6OTAZUBXynZ33dpHQBKtqlI5jGYyiutThJQaRDX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/motors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"motors"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Kendaraan",
+			"item": [
+				{
+					"name": "get stock",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc2MzQ0MzYsImV4cCI6MTY3NzYzODAzNiwibmJmIjoxNjc3NjM0NDM2LCJqdGkiOiJjcEJEQmJQdUphNzBtVzd1Iiwic3ViIjoiNjNmZGU1YTBhOWIxNmU0NTUwMDkyZGMzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.bAv6OTAZUBXynZ33dpHQBKtqlI5jGYyiutThJQaRDX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/kendaraans/stock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"kendaraans",
+								"stock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc2MzQ0MzYsImV4cCI6MTY3NzYzODAzNiwibmJmIjoxNjc3NjM0NDM2LCJqdGkiOiJjcEJEQmJQdUphNzBtVzd1Iiwic3ViIjoiNjNmZGU1YTBhOWIxNmU0NTUwMDkyZGMzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.bAv6OTAZUBXynZ33dpHQBKtqlI5jGYyiutThJQaRDX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/kendaraans",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"kendaraans"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaksi",
+			"item": [
+				{
+					"name": "jual",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc2MzQ0MzYsImV4cCI6MTY3NzYzODAzNiwibmJmIjoxNjc3NjM0NDM2LCJqdGkiOiJjcEJEQmJQdUphNzBtVzd1Iiwic3ViIjoiNjNmZGU1YTBhOWIxNmU0NTUwMDkyZGMzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.bAv6OTAZUBXynZ33dpHQBKtqlI5jGYyiutThJQaRDX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_kendaraan\" : \"63feac74c0749fadab0acf65\",\r\n    \"harga_jual\" : 5000000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/transaksi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"transaksi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "report",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc2MTA5NTQsImV4cCI6MTY3NzYxNDU1NCwibmJmIjoxNjc3NjEwOTU0LCJqdGkiOiJPeUNSQzZrSXN6Tjd6d3ZuIiwic3ViIjoiNjNmZGU1YTBhOWIxNmU0NTUwMDkyZGMzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Zc7LiRNGRyoBBOUhFzU2O8h-e7CPqx2qJeOQzZPZJ8s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_kendaraan\" : \"63fcc9fa1d23d88fef0ae60b\",\r\n    \"harga_jual\" : 5000000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/transaksi/report",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"transaksi",
+								"report"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"denni\",\r\n    \"email\" : \"denni@gmail.com\",\r\n    \"password\" : \"abc123\",\r\n    \"password_confirmation\" : \"abc123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"denni@gmail.com\",\r\n    \"password\" : \"abc123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc1Nzg0MzgsImV4cCI6MTY3NzU4MjAzOCwibmJmIjoxNjc3NTc4NDM4LCJqdGkiOiJOQ0tkYms0RVFscUR2YkFsIiwic3ViIjoiNjNmZGNjZDJhOWIxNmU0NTUwMDkyZGMyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.HFV7mzoqU0bvEivIqgwP9uzsTfEChEFyuBCNYMwbz0w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc1NzgwMTcsImV4cCI6MTY3NzU4MTYxNywibmJmIjoxNjc3NTc4MDE3LCJqdGkiOiJRdllOTjVobEZ3cURGSjRjIiwic3ViIjoiNjNmZGNjZDJhOWIxNmU0NTUwMDkyZGMyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.nLzdzp7mGOIF-Vone8_yJEWOWHC8TGqxkYw13DnQ6hs",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc1Nzg0MzgsImV4cCI6MTY3NzU4MjAzOCwibmJmIjoxNjc3NTc4NDM4LCJqdGkiOiJOQ0tkYms0RVFscUR2YkFsIiwic3ViIjoiNjNmZGNjZDJhOWIxNmU0NTUwMDkyZGMyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.HFV7mzoqU0bvEivIqgwP9uzsTfEChEFyuBCNYMwbz0w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc1NzgwNjUsImV4cCI6MTY3NzU4MTY2NSwibmJmIjoxNjc3NTc4MDY1LCJqdGkiOiJoSmVLOWpsQ25vTGZSVEVPIiwic3ViIjoiNjNmZGNjZDJhOWIxNmU0NTUwMDkyZGMyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.okJME2HxwZXxBoSWX10LY6zm3uEF2NgkXGKvNKaSFBY",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"denni@gmail.com\",\r\n    \"password\" : \"abc123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mobil",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc2MDcxNzAsImV4cCI6MTY3NzYxMDc3MCwibmJmIjoxNjc3NjA3MTcwLCJqdGkiOiJxMnp0VkhGMlVXVWtDeERjIiwic3ViIjoiNjNmZGU1YTBhOWIxNmU0NTUwMDkyZGMzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.24vCFPDLuIuEFN3e8yl-SZWp8yU6KTleDDY9vwAYZfY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tahun_keluaran\" : 2001,\r\n    \"warna\" : \"abu-abu\",\r\n    \"harga\" : 1000000,\r\n    \"mesin\" : \"baru\",\r\n    \"kapasitas_penumpang\" : 4,\r\n    \"tipe\" : \"B\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/mobils/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"mobils",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc1Nzg0MzgsImV4cCI6MTY3NzU4MjAzOCwibmJmIjoxNjc3NTc4NDM4LCJqdGkiOiJOQ0tkYms0RVFscUR2YkFsIiwic3ViIjoiNjNmZGNjZDJhOWIxNmU0NTUwMDkyZGMyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.HFV7mzoqU0bvEivIqgwP9uzsTfEChEFyuBCNYMwbz0w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tahun_keluaran\" : 2001,\r\n    \"warna\" : \"abu-abu\",\r\n    \"harga\" : 1,\r\n    \"mesin\" : \"baru\",\r\n    \"kapasitas_penumpang\" : 1,\r\n    \"tipe\" : \"B\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/mobils/63fcb6735c494eb010053510",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"mobils",
+								"63fcb6735c494eb010053510"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc1Nzg0MzgsImV4cCI6MTY3NzU4MjAzOCwibmJmIjoxNjc3NTc4NDM4LCJqdGkiOiJOQ0tkYms0RVFscUR2YkFsIiwic3ViIjoiNjNmZGNjZDJhOWIxNmU0NTUwMDkyZGMyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.HFV7mzoqU0bvEivIqgwP9uzsTfEChEFyuBCNYMwbz0w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/api/mobils/63fcb6fe5c494eb010053512",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"mobils",
+								"63fcb6fe5c494eb010053512"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc1Nzg0MzgsImV4cCI6MTY3NzU4MjAzOCwibmJmIjoxNjc3NTc4NDM4LCJqdGkiOiJOQ0tkYms0RVFscUR2YkFsIiwic3ViIjoiNjNmZGNjZDJhOWIxNmU0NTUwMDkyZGMyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.HFV7mzoqU0bvEivIqgwP9uzsTfEChEFyuBCNYMwbz0w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/mobils/63fcb89c1d23d88fef0ae602",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"mobils",
+								"63fcb89c1d23d88fef0ae602"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzc2MTE3MDQsImV4cCI6MTY3NzYxNTMwNCwibmJmIjoxNjc3NjExNzA0LCJqdGkiOiJxUDlkcFdLa0tSdnl1bWZoIiwic3ViIjoiNjNmZGU1YTBhOWIxNmU0NTUwMDkyZGMzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9._d7cQgGWHymELCchvJeiQDaj8wta2wBQ8M5a77NpyK8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/mobils/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"mobils",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
